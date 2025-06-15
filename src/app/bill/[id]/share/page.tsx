@@ -66,12 +66,14 @@ export default function BillSharePage() {
         <h2 className="text-xl font-semibold mb-4">Share with Others</h2>
         <div className="space-y-4">
           <div className="flex items-center gap-2">
-            <input
-              type="text"
-              value={shareUrl}
-              readOnly
-              className="flex-1 px-3 py-2 border rounded-md bg-gray-50"
-            />
+            <a
+              href={shareUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 px-3 py-2 border rounded-md bg-gray-50 text-blue-600 underline hover:text-blue-800 cursor-pointer"
+            >
+              {shareUrl}
+            </a>
             <button
               onClick={handleCopyLink}
               className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
@@ -80,7 +82,7 @@ export default function BillSharePage() {
             </button>
           </div>
           <div className="flex justify-center p-4 bg-white rounded-lg">
-            <QRCodeSVG value={shareUrl} size={200} />
+            <QRCodeSVG value={shareUrl} size={300} />
           </div>
         </div>
       </div>
@@ -198,16 +200,6 @@ export default function BillSharePage() {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </div>
-
-      {/* Action Button */}
-      <div>
-        <button
-          onClick={() => router.push('/')}
-          className="w-full py-2 px-4 bg-gray-200 text-gray-800 rounded-lg hover:bg-gray-300"
-        >
-          Create New Bill
-        </button>
       </div>
     </div>
   );

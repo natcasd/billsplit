@@ -109,6 +109,23 @@ export default function ReviewPage() {
     return null;
   }
 
+  if (!bill.isReceipt) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Not a valid receipt</h1>
+          <p className="mb-4">The uploaded image was not recognized as a valid receipt. Please try again.</p>
+          <button
+            onClick={() => router.push('/upload')}
+            className="px-4 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-500"
+          >
+            Retake Photo
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-2xl font-bold text-gray-900 mb-8">Review Bill</h1>
@@ -117,7 +134,7 @@ export default function ReviewPage() {
           <img src={imageData} alt="Receipt" className="max-h-96 rounded shadow" />
         </div>
       )}
-      <BillReview initialBill={bill} onSave={handleSave} />
+      <BillReview initialBill={bill} onSave={handleSave} showRetakeButton />
     </div>
   );
 } 

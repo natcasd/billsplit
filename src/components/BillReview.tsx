@@ -15,9 +15,10 @@ import {
 interface BillReviewProps {
   initialBill: Bill;
   onSave: (bill: Bill) => Promise<void>;
+  showRetakeButton?: boolean;
 }
 
-export default function BillReview({ initialBill, onSave }: BillReviewProps) {
+export default function BillReview({ initialBill, onSave, showRetakeButton = false }: BillReviewProps) {
   const [bill, setBill] = useState<Bill>(initialBill);
   const [isSaving, setIsSaving] = useState(false);
   const [showDialog, setShowDialog] = useState(false);
@@ -126,7 +127,15 @@ export default function BillReview({ initialBill, onSave }: BillReviewProps) {
   };
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 relative">
+      {showRetakeButton && (
+        <button
+          onClick={() => window.location.href = '/upload'}
+          className="absolute top-0 right-0 px-4 py-2 text-sm text-white bg-red-600 rounded-md hover:bg-red-500 mt-4 mr-4"
+        >
+          Retake Photo
+        </button>
+      )}
       {/* Re-extract from Bill Modal */}
       <Dialog open={showDialog} onOpenChange={setShowDialog}>
         <button
@@ -200,7 +209,7 @@ export default function BillReview({ initialBill, onSave }: BillReviewProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Tax Amount
             </label>
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <input
                 type="number"
                 value={bill.tax}
@@ -209,7 +218,7 @@ export default function BillReview({ initialBill, onSave }: BillReviewProps) {
                 step="0.01"
                 min="0"
               />
-              <div className="flex items-center gap-4">
+              <div className="flex gap-4 mt-2 md:mt-0 items-center">
                 <label className="flex items-center">
                   <input
                     type="radio"
@@ -237,7 +246,7 @@ export default function BillReview({ initialBill, onSave }: BillReviewProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Tip Amount
             </label>
-            <div className="flex gap-4">
+            <div className="flex flex-col md:flex-row gap-2 md:gap-4">
               <input
                 type="number"
                 value={bill.tip}
@@ -246,7 +255,7 @@ export default function BillReview({ initialBill, onSave }: BillReviewProps) {
                 step="0.01"
                 min="0"
               />
-              <div className="flex items-center gap-4">
+              <div className="flex gap-4 mt-2 md:mt-0 items-center">
                 <label className="flex items-center">
                   <input
                     type="radio"

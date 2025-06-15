@@ -28,7 +28,7 @@ export default function EditableItem({ item, onUpdate, onDelete }: EditableItemP
 
   if (isEditing) {
     return (
-      <div className="flex items-center gap-4 p-2 bg-gray-50 rounded-lg">
+      <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 md:gap-4 p-2 bg-gray-50 rounded-lg">
         <input
           type="text"
           value={editedName}
@@ -40,7 +40,7 @@ export default function EditableItem({ item, onUpdate, onDelete }: EditableItemP
           type="number"
           value={editedPrice}
           onChange={(e) => setEditedPrice(e.target.value)}
-          className="w-24 px-3 py-2 border rounded-md"
+          className="w-full md:w-24 px-3 py-2 border rounded-md"
           placeholder="Price"
           step="0.01"
           min="0"
@@ -49,22 +49,24 @@ export default function EditableItem({ item, onUpdate, onDelete }: EditableItemP
           type="number"
           value={editedQuantity}
           onChange={(e) => setEditedQuantity(e.target.value)}
-          className="w-20 px-3 py-2 border rounded-md"
+          className="w-full md:w-20 px-3 py-2 border rounded-md"
           placeholder="Qty"
           min="1"
         />
-        <button
-          onClick={handleSave}
-          className="px-3 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-500"
-        >
-          Save
-        </button>
-        <button
-          onClick={() => setIsEditing(false)}
-          className="px-3 py-2 text-gray-600 hover:text-gray-800"
-        >
-          Cancel
-        </button>
+        <div className="flex gap-2 mt-2 md:mt-0">
+          <button
+            onClick={handleSave}
+            className="px-3 py-2 text-white bg-indigo-600 rounded-md hover:bg-indigo-500"
+          >
+            Save
+          </button>
+          <button
+            onClick={() => setIsEditing(false)}
+            className="px-3 py-2 text-gray-600 hover:text-gray-800"
+          >
+            Cancel
+          </button>
+        </div>
       </div>
     );
   }
